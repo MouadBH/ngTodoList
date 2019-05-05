@@ -1,0 +1,36 @@
+
+<div class="row">
+  <div class="col-md-6">
+      <div class="todolist not-done">
+       <h1>Todos</h1>
+          <input type="text" class="form-control add-todo" placeholder="Add todo" [(ngModel)]="todo.value" >
+              <button [disabled]="todo.value ==''" class="btn btn-success" (click)="onAdd()">Add</button>
+
+              <hr>
+              <ul id="sortable" class="list-unstyled">
+              <li *ngFor='let todo of todos' class="ui-state-default" (click)="toDone(todo.id)">
+                  <div class="checkbox">
+                      <label>
+                           {{ todo.value }} </label>
+                          <span class="badge"> {{ todo.date|date: 'HH:mm:ss' }} </span>
+                  </div>
+              </li>
+          </ul>
+          <div *ngIf="getItemNumber() != 0; else noItem" class="todo-footer">
+              <strong><span class="count-todos"></span></strong> Items Left {{ getItemNumber() }}
+          </div>
+          <ng-template #noItem> No item left</ng-template>
+      </div>
+  </div>
+  <div class="col-md-6">
+      <div class="todolist">
+       <h1>Already Done</h1>
+          <ul id="done-items" class="list-unstyled">
+              <li *ngFor="let done of dones"> {{ done.value }} <button class="remove-item btn btn-default btn-xs pull-right">
+                <span class="glyphicon glyphicon-remove" (click)="removeDone(done.id)"></span></button>
+              </li>
+
+          </ul>
+      </div>
+  </div>
+</div>
